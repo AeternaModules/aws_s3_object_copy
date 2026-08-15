@@ -159,7 +159,7 @@ output "s3_object_copies_object_lock_retain_until_date" {
 }
 output "s3_object_copies_override_provider" {
   description = "Map of override_provider values across all s3_object_copies, keyed the same as var.s3_object_copies"
-  value       = { for k, v in aws_s3_object_copy.s3_object_copies : k => v.override_provider if v.override_provider != null && length(v.override_provider) > 0 }
+  value       = { for k, v in aws_s3_object_copy.s3_object_copies : k => one(v.override_provider) if v.override_provider != null && length(v.override_provider) > 0 }
 }
 output "s3_object_copies_region" {
   description = "Map of region values across all s3_object_copies, keyed the same as var.s3_object_copies"
